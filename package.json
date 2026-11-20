@@ -1,0 +1,12 @@
+{
+  "name": "mlbb-tournament-register",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website pendaftaran turnamen Mobile Legends -> Discord webhook (Netlify/Vercel)",
+  "scripts": {
+    "dev": "node dev-server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

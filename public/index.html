@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pendaftaran Turnamen Mobile Legends</title>
+  <meta name="description" content="Daftarkan tim Mobile Legends kamu sekarang!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="hero">
+    <span class="badge">🔥 Pendaftaran Dibuka</span>
+    <h1>MLBB <span>Community Cup</span></h1>
+    <p class="subtitle">Turnamen Mobile Legends: Bang Bang 5v5 — tunjukkan skill tim kamu!</p>
+
+    <div class="info-grid">
+      <div class="info"><strong>🏆 Hadiah</strong><span>Total Rp 5.000.000</span></div>
+      <div class="info"><strong>📅 Jadwal</strong><span>Segera diumumkan</span></div>
+      <div class="info"><strong>🎮 Format</strong><span>5v5 • BO3 Single Elim</span></div>
+      <div class="info"><strong>💸 Biaya</strong><span>Gratis</span></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <form id="regForm" class="card" novalidate>
+      <!-- Honeypot anti-bot (jangan dihapus) -->
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" />
+
+      <section>
+        <h2><span class="step">1</span> Data Tim</h2>
+        <div class="grid">
+          <label>Nama Tim *
+            <input name="teamName" required minlength="3" maxlength="40" placeholder="Contoh: Evos Legends" />
+          </label>
+          <label>Tag Tim
+            <input name="teamTag" maxlength="6" placeholder="Contoh: EVOS" />
+          </label>
+          <label>Nama Kapten *
+            <input name="captainName" required minlength="3" maxlength="50" placeholder="Nama lengkap" />
+          </label>
+          <label>No. WhatsApp *
+            <input name="whatsapp" required type="tel" inputmode="tel" maxlength="20" placeholder="081234567890" />
+          </label>
+          <label>Email *
+            <input name="email" required type="email" maxlength="100" placeholder="kapten@email.com" />
+          </label>
+          <label>Username Discord
+            <input name="discord" maxlength="40" placeholder="username" />
+          </label>
+          <label>Kota / Asal
+            <input name="city" maxlength="40" placeholder="Jakarta" />
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2><span class="step">2</span> Roster Pemain</h2>
+        <p class="hint">Isi 5 pemain inti (wajib) + 1 pemain cadangan (opsional). ID & Server bisa dilihat di profil game.</p>
+        <div id="players" class="players"></div>
+      </section>
+
+      <section>
+        <h2><span class="step">3</span> Konfirmasi</h2>
+        <label>Catatan untuk panitia
+          <textarea name="notes" maxlength="300" rows="3" placeholder="Opsional"></textarea>
+        </label>
+
+        <details class="rules">
+          <summary>📜 Baca peraturan turnamen</summary>
+          <ol>
+            <li>Setiap pemain hanya boleh terdaftar di satu tim.</li>
+            <li>Dilarang menggunakan cheat, map hack, atau akun joki.</li>
+            <li>Tim wajib hadir 15 menit sebelum jadwal pertandingan.</li>
+            <li>Keputusan panitia bersifat mutlak dan tidak dapat diganggu gugat.</li>
+          </ol>
+        </details>
+
+        <label class="check">
+          <input type="checkbox" name="agree" required />
+          <span>Saya menyetujui peraturan turnamen dan data yang diisi sudah benar.</span>
+        </label>
+      </section>
+
+      <div id="errorBox" class="error-box" hidden></div>
+
+      <button type="submit" id="submitBtn" class="btn">
+        <span class="btn-text">Daftarkan Tim</span>
+        <span class="spinner" hidden></span>
+      </button>
+    </form>
+  </main>
+
+  <footer>© <span id="year"></span> MLBB Community Cup • Bukan afiliasi resmi Moonton</footer>
+
+  <!-- Modal sukses -->
+  <div id="successModal" class="modal" hidden>
+    <div class="modal-card">
+      <div class="check-icon">✓</div>
+      <h3>Pendaftaran Berhasil!</h3>
+      <p>Tim <strong id="okTeam"></strong> sudah terdaftar. Simpan kode registrasi berikut:</p>
+      <div class="code" id="okCode"></div>
+      <p class="hint">Panitia akan menghubungi kapten melalui WhatsApp.</p>
+      <button class="btn" id="closeModal">Tutup</button>
+    </div>
+  </div>
+
+  <template id="playerTpl">
+    <fieldset class="player">
+      <legend></legend>
+      <div class="grid grid-4">
+        <label>Nickname
+          <input data-f="nickname" maxlength="30" placeholder="Nickname in-game" />
+        </label>
+        <label>ID Game
+          <input data-f="gameId" inputmode="numeric" maxlength="12" placeholder="12345678" />
+        </label>
+        <label>Server
+          <input data-f="serverId" inputmode="numeric" maxlength="6" placeholder="1234" />
+        </label>
+        <label>Role
+          <select data-f="role">
+            <option value="">- Pilih -</option>
+            <option>Gold Lane</option>
+            <option>EXP Lane</option>
+            <option>Mid Lane</option>
+            <option>Jungler</option>
+            <option>Roamer</option>
+            <option>Flex</option>
+          </select>
+        </label>
+      </div>
+    </fieldset>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
